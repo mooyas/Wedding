@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8f3f1">
+  <meta name="description" content="Scan to add your wedding photos to Adriana and Robert's shared album.">
+  <title>Share Wedding Photos | Adriana &amp; Robert</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #f8f3f1;
+      --paper-deep: #efe5e4;
+      --ink: #382a30;
+      --muted: #766a6f;
+      --burgundy: #7a4052;
+      --burgundy-dark: #512333;
+      --line: #e2d5d7;
+      --white: #fffdfb;
+      --serif: "Playfair Display", Georgia, serif;
+      --sans: "DM Sans", Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { min-height: 100vh; margin: 0; background: var(--paper); color: var(--ink); font: 15px/1.65 var(--sans); -webkit-font-smoothing: antialiased; }
+    a { color: inherit; }
+    :focus-visible { outline: 3px solid #b77888; outline-offset: 4px; }
+    .announcement { background: var(--burgundy-dark); color: var(--paper); padding: 8px 16px; text-align: center; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
+    .site-header { position: sticky; z-index: 2; top: 0; border-bottom: 1px solid rgba(40, 53, 45, .09); background: rgba(248, 243, 241, .96); backdrop-filter: blur(12px); }
+    .nav-wrap { display: flex; width: min(1160px, calc(100% - 48px)); min-height: 70px; align-items: center; justify-content: space-between; gap: 20px; margin: 0 auto; }
+    .wordmark { color: var(--burgundy-dark); font: 500 19px/1.2 var(--serif); text-decoration: none; white-space: nowrap; }
+    .wordmark span { color: #a77a79; font-style: italic; }
+    .nav-links { display: flex; flex-wrap: wrap; align-items: center; gap: clamp(16px, 3vw, 34px); }
+    .nav-links a { color: #5f4e55; font-size: 11px; font-weight: 600; letter-spacing: .1em; text-decoration: none; text-transform: uppercase; }
+    .nav-links a:hover, .nav-links a[aria-current="page"] { color: #985e70; }
+    main { padding: clamp(42px, 8vw, 86px) 22px 74px; }
+    .content { width: min(850px, 100%); margin: 0 auto; text-align: center; }
+    .eyebrow { margin: 0 0 13px; color: #966e77; font-size: 11px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; }
+    h1 { margin: 0; color: var(--burgundy-dark); font: 400 clamp(42px, 7vw, 68px)/1.1 var(--serif); letter-spacing: -.03em; }
+    .lede { max-width: 590px; margin: 18px auto 0; color: var(--muted); }
+    .album-card { display: grid; grid-template-columns: minmax(230px, .9fr) 1.1fr; align-items: center; gap: clamp(25px, 5vw, 50px); margin-top: 39px; border: 1px solid var(--line); background: rgba(255, 253, 251, .88); padding: clamp(22px, 5vw, 44px); text-align: left; box-shadow: 0 14px 44px rgba(81, 35, 51, .06); }
+    .qr-frame { display: grid; width: min(100%, 290px); aspect-ratio: 1; place-items: center; justify-self: center; border: 1px solid var(--line); background: white; padding: 14px; box-shadow: 0 8px 28px rgba(81, 35, 51, .08); }
+    #album-qr { display: grid; width: 100%; height: 100%; place-items: center; }
+    #album-qr img, #album-qr canvas { display: block; max-width: 100%; max-height: 100%; }
+    .qr-placeholder { display: grid; width: 100%; height: 100%; place-items: center; background: repeating-linear-gradient(45deg, #f6f0ef, #f6f0ef 8px, #fffdfb 8px, #fffdfb 16px); color: #927e83; padding: 20px; font-size: 12px; text-align: center; }
+    .album-copy h2 { margin: 0 0 13px; color: var(--burgundy-dark); font: 500 clamp(27px, 4vw, 36px)/1.2 var(--serif); }
+    .album-copy p { margin: 0 0 13px; color: var(--muted); }
+    .steps { display: grid; gap: 12px; margin: 23px 0 0; padding: 0; list-style: none; counter-reset: album-steps; }
+    .steps li { display: grid; grid-template-columns: 29px 1fr; align-items: start; gap: 10px; color: #5e5056; font-size: 13px; counter-increment: album-steps; }
+    .steps li::before { display: grid; width: 26px; height: 26px; place-items: center; border-radius: 50%; background: #efe2e4; color: var(--burgundy-dark); content: counter(album-steps); font-size: 11px; font-weight: 700; }
+    .qr-status { min-height: 24px; margin: 14px 0 0; color: #8d606d; font-size: 12px; }
+    .notice { margin: 22px 0 0; border-left: 2px solid #b99591; background: #f3eae8; color: #67575d; padding: 13px 15px; font-size: 12px; text-align: left; }
+    .notice strong { color: var(--burgundy-dark); }
+    .back-link { display: inline-block; margin-top: 24px; color: var(--burgundy-dark); font-size: 11px; font-weight: 600; letter-spacing: .1em; text-decoration: none; text-transform: uppercase; }
+    .footer { border-top: 1px solid var(--line); padding: 26px 20px; text-align: center; }
+    .footer p { margin: 0; color: #8a7d81; font-size: 11px; }
+    @media (max-width: 650px) {
+      .nav-wrap { width: calc(100% - 32px); min-height: 62px; align-items: flex-start; justify-content: center; flex-direction: column; gap: 10px; padding: 12px 0; }
+      .nav-links { gap: 11px 17px; }
+      .nav-links a { font-size: 9px; }
+      .announcement { font-size: 9px; }
+      .album-card { grid-template-columns: 1fr; }
+      .qr-frame { width: min(100%, 260px); }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+</head>
+<body>
+  <div class="announcement">October 30, 2027 &nbsp;&middot;&nbsp; The Barn at Cave Springs</div>
+  <header class="site-header">
+    <nav class="nav-wrap" aria-label="Main navigation">
+      <a class="wordmark" href="index.html">Adriana <span>&amp;</span> Robert</a>
+      <div class="nav-links">
+        <a href="index.html">Welcome</a>
+        <a href="index.html#day">Schedule</a>
+        <a href="index.html#seating">Seating</a>
+        <a href="index.html#gallery">Gallery</a>
+        <a href="photos.html" aria-current="page">Share photos</a>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="content">
+      <p class="eyebrow">A day worth remembering</p>
+      <h1>Share the love</h1>
+      <p class="lede">Add your favorite moments to Adriana and Robert's collaborative wedding album. Scan the QR code with your phone camera to open the album and contribute your photos.</p>
+      <section class="album-card" aria-labelledby="album-title">
+        <div class="qr-frame">
+          <div id="album-qr" role="img" aria-label="QR code for the shared wedding photo album">
+            <div class="qr-placeholder">The shared-album QR code will appear here.</div>
+          </div>
+        </div>
+        <div class="album-copy">
+          <p class="eyebrow">Scan to contribute</p>
+          <h2 id="album-title">Our shared album</h2>
+          <p>Open your phone camera, point it at the code, and tap the link to add photos to the album.</p>
+          <ol class="steps">
+            <li>Open your camera and scan the QR code.</li>
+            <li>Tap the album link that appears.</li>
+            <li>Choose photos and add them to the shared album.</li>
+          </ol>
+          <p class="qr-status" id="qr-status" role="status" aria-live="polite">The shared album link hasn't been connected yet.</p>
+        </div>
+      </section>
+      <p class="notice"><strong>Album setup needed:</strong> A collaborative QR code must point to a real shared album. Create an album with guest contributions enabled, then add its share link to <code>SHARED_ALBUM_URL</code> in <code>photos.html</code>. Until then, no QR is shown rather than sending guests to a broken or unrelated page.</p>
+      <a class="back-link" href="index.html#gallery">&larr; Back to the wedding page</a>
+    </div>
+  </main>
+  <footer class="footer">
+    <p>Adriana &amp; Robert &nbsp;&middot;&nbsp; October 30, 2027</p>
+  </footer>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Paste the public contribution link from the shared album provider here.
+      const SHARED_ALBUM_URL = "";
+      const qr = document.querySelector("#album-qr");
+      const qrStatus = document.querySelector("#qr-status");
+
+      if (SHARED_ALBUM_URL) {
+        if (!/^https:\/\//i.test(SHARED_ALBUM_URL)) {
+          qrStatus.textContent = "The shared-album link must use HTTPS.";
+        } else if (window.QRCode) {
+          qr.replaceChildren();
+          new QRCode(qr, {
+            text: SHARED_ALBUM_URL,
+            width: 250,
+            height: 250,
+            colorDark: "#512333",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.M
+          });
+          qrStatus.textContent = "Scan this code to open the shared photo album.";
+        } else {
+          qrStatus.textContent = "The QR generator couldn't load. Check your connection and reload the page.";
+          console.error("The QR code library did not load.");
+        }
+      }
+    });
+  </script>
+</body>
+</html>

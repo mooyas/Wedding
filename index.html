@@ -1,173 +1,441 @@
-html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Wedding App</title>
-    <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; padding: 20px; background-color: #fcfbf9; color: #333; text-align: center; }
-        .wrapper { max-width: 450px; margin: 0 auto; }
-        h1 { color: #5c2c3a; margin-top: 10px; font-weight: 400; letter-spacing: 1px; }
-        .date { font-style: italic; color: #777; margin-bottom: 35px; }
-        .card { background: white; border-radius: 16px; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); margin-bottom: 25px; border: 1px solid #f0ebe4; }
-        h3 { margin-top: 0; color: #5c2c3a; font-size: 20px; }
-        p { color: #666; font-size: 14px; line-height: 1.5; }
-        .btn { display: inline-block; background: #5c2c3a; color: white; padding: 14px 28px; text-decoration: none; border-radius: 30px; font-weight: bold; margin-top: 10px; width: 80%; box-shadow: 0 2px 6px rgba(92,44,58,0.2); box-sizing: border-box; }
-        input[type="text"] { width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 30px; font-size: 16px; margin-bottom: 15px; outline: none; text-align: center; box-sizing: border-box; }
-        input[type="text"]:focus { border-color: #5c2c3a; }
-        .hidden { display: none; }
-        ul { list-style: none; padding: 0; margin: 10px 0 0 0; }
-        li { padding: 12px; border-bottom: 1px solid #f7f5f2; font-size: 18px; color: #444; font-weight: 500; }
-        li:last-child { border-bottom: none; }
-        .no-results { color: #999; font-style: italic; font-size: 14px; margin-top: 10px; }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8f3f1">
+  <meta name="description" content="Join Adriana Ierullo and Robert Dworak at The Barn at Cave Springs on October 30, 2027.">
+  <title>Adriana &amp; Robert | October 30, 2027</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f8f3f1;
+      --paper-deep: #efe5e4;
+      --ink: #382a30;
+      --muted: #766a6f;
+      --burgundy: #7a4052;
+      --burgundy-dark: #512333;
+      --rose: #eadde0;
+      --line: #e2d5d7;
+      --white: #fffdfb;
+      --serif: "Playfair Display", Georgia, serif;
+      --sans: "DM Sans", Arial, sans-serif;
+      --content: 1160px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; }
+    button, input, select, textarea { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    :focus-visible { outline: 3px solid #b77888; outline-offset: 4px; }
+    .container { width: min(var(--content), calc(100% - 64px)); margin-inline: auto; }
+
+    .announcement {
+      background: var(--burgundy-dark);
+      color: #f8f3f1;
+      padding: 8px 16px;
+      text-align: center;
+      font-size: 11px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .site-header {
+      position: sticky;
+      z-index: 10;
+      top: 0;
+      border-bottom: 1px solid rgba(40, 53, 45, .09);
+      background: rgba(248, 243, 241, .96);
+      backdrop-filter: blur(12px);
+    }
+    .nav-wrap {
+      min-height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .wordmark {
+      color: var(--burgundy-dark);
+      font: 500 19px/1.2 var(--serif);
+      letter-spacing: .02em;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .wordmark span { color: #a77a79; font-style: italic; }
+    .nav-links { display: flex; align-items: center; gap: clamp(17px, 3vw, 38px); }
+    .nav-links a {
+      color: #5f4e55;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color .2s ease;
+    }
+    .nav-links a:hover { color: #985e70; }
+    .menu-toggle {
+      display: none;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: transparent;
+      color: var(--ink);
+      width: 42px;
+      height: 42px;
+      cursor: pointer;
+    }
+
+    .hero {
+      min-height: min(700px, calc(100svh - 105px));
+      min-height: min(700px, calc(100vh - 105px));
+      position: relative;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background: #65414c;
+      color: white;
+      text-align: center;
+    }
+    .hero-image, .hero-shade { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .hero-image { object-fit: cover; object-position: center 54%; }
+    .hero-shade { background: linear-gradient(180deg, rgba(42, 19, 29, .24), rgba(42, 19, 29, .14) 33%, rgba(42, 19, 29, .68)); }
+    .hero-content { position: relative; z-index: 1; padding: 72px 24px 84px; }
+    .eyebrow {
+      margin: 0 0 20px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+    }
+    .hero h1 {
+      margin: 0;
+      font: 400 clamp(58px, 10vw, 118px)/.99 var(--serif);
+      letter-spacing: -.045em;
+      text-shadow: 0 2px 26px rgba(0, 0, 0, .16);
+    }
+    .hero h1 span { display: block; font-size: 1em; font-style: normal; line-height: 1.05; }
+    .hero-date {
+      margin: 29px 0 27px;
+      font-size: 12px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+    .button {
+      display: inline-flex;
+      min-height: 48px;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      border: 1px solid var(--burgundy-dark);
+      border-radius: 99px;
+      background: var(--burgundy-dark);
+      color: white;
+      padding: 12px 24px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: transform .2s ease, background .2s ease, color .2s ease;
+      cursor: pointer;
+    }
+    .button:hover { transform: translateY(-2px); background: #704052; }
+    .button-light { border-color: white; background: white; color: var(--burgundy-dark); }
+    .button-light:hover { border-color: var(--paper); background: var(--paper); color: var(--burgundy-dark); }
+
+    .section-eyebrow { color: #966e77; }
+    .section-title {
+      margin: 0 auto;
+      color: var(--burgundy-dark);
+      font: 400 clamp(36px, 5vw, 57px)/1.15 var(--serif);
+      letter-spacing: -.025em;
+    }
+    .details { background: #f0e9e7; padding: 96px 0 104px; }
+    .section-heading { margin-bottom: 51px; text-align: center; }
+    .section-heading .section-eyebrow { margin: 0 0 12px; }
+    .section-heading .section-title { max-width: 700px; }
+    .timeline { position: relative; display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; }
+    .timeline::before { position: absolute; top: 14px; right: 9%; left: 9%; height: 1px; background: #d5c5c8; content: ""; }
+    .timeline-item { position: relative; padding: 0 18px; text-align: center; }
+    .timeline-dot {
+      position: relative;
+      z-index: 1;
+      display: block;
+      width: 29px;
+      height: 29px;
+      margin: 0 auto 25px;
+      border: 1px solid #b28c94;
+      border-radius: 50%;
+      background: #f0e9e7;
+    }
+    .timeline-dot::after { position: absolute; inset: 8px; border-radius: 50%; background: var(--burgundy); content: ""; }
+    .timeline-time { margin: 0 0 9px; color: #966e77; font-size: 10px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+    .timeline-item h3 { margin: 0 0 10px; color: var(--burgundy-dark); font: 500 23px/1.2 var(--serif); }
+    .timeline-item p:last-child { max-width: 220px; margin: 0 auto; color: #766a6f; font-size: 13px; }
+    .details-note { margin: 38px 0 0; color: #766a6f; font-size: 12px; text-align: center; }
+
+    .gallery { padding: 5px 0 102px; }
+    .gallery .section-heading { margin-bottom: 39px; }
+    .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+    .gallery-grid figure { position: relative; min-height: 265px; overflow: hidden; margin: 0; background: var(--paper-deep); }
+    .gallery-grid img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .55s ease; }
+    .gallery-grid figure::after { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(39, 21, 27, .02) 30%, rgba(39, 21, 27, .46)); content: ""; pointer-events: none; }
+    .gallery-grid figure:hover img { transform: scale(1.04); }
+    .gallery-grid figcaption { position: absolute; z-index: 1; right: 20px; bottom: 16px; left: 20px; color: white; font: italic 20px var(--serif); text-shadow: 0 1px 8px rgba(0, 0, 0, .35); }
+    .photo-invitation { margin: 27px auto 0; color: var(--muted); text-align: center; }
+    .photo-invitation a { display: inline-block; margin-top: 10px; color: var(--burgundy-dark); font-size: 11px; font-weight: 600; letter-spacing: .1em; text-decoration: none; text-transform: uppercase; }
+
+    .seating { padding: 82px 0 92px; scroll-margin-top: 80px; }
+    .seating-panel { max-width: 850px; margin: 0 auto; text-align: center; }
+    .seating-panel .section-eyebrow { margin: 0 0 12px; }
+    .seating-panel .section-title { font-size: clamp(38px, 5vw, 56px); }
+    .seating-panel > p:not(.section-eyebrow) { max-width: 570px; margin: 16px auto 25px; color: var(--muted); }
+    .search-box { position: relative; max-width: 600px; margin: 0 auto; }
+    .search-box input { width: 100%; min-height: 58px; border: 1px solid #cdb9bd; border-radius: 3px; background: var(--white); padding: 14px 18px; box-shadow: 0 8px 24px rgba(81, 35, 51, .06); }
+    .guest-results { display: grid; gap: 8px; margin: 14px 0 0; padding: 0; list-style: none; text-align: left; }
+    .guest-results li { border: 1px solid var(--line); background: var(--white); padding: 16px 18px; }
+    .guest-results strong { display: block; color: var(--burgundy-dark); font: 500 21px var(--serif); }
+    .guest-results span { display: block; margin-top: 5px; color: var(--muted); font-size: 13px; }
+    .guest-empty { margin: 13px 0 0; color: #8e5160; font-size: 13px; }
+    .guest-hint { margin: 11px 0 0; color: #85827e; font-size: 12px; }
+
+    .footer { border-top: 1px solid var(--line); padding: 32px 0; }
+    .footer-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; }
+    .footer-brand { color: var(--burgundy-dark); font: 500 20px var(--serif); }
+    .footer p { margin: 0; color: #8a8d84; font-size: 11px; }
+    .back-top { color: var(--burgundy); font-size: 11px; font-weight: 600; letter-spacing: .08em; text-decoration: none; text-transform: uppercase; }
+
+    @media (max-width: 760px) {
+      .container { width: min(100% - 42px, var(--content)); }
+      .nav-wrap { min-height: 64px; }
+      .menu-toggle { display: grid; place-items: center; }
+      .nav-links {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+        display: none;
+        align-items: stretch;
+        gap: 0;
+        border-bottom: 1px solid var(--line);
+        background: var(--paper);
+        padding: 7px 21px 17px;
+      }
+      .nav-links.is-open { display: flex; flex-direction: column; }
+      .nav-links a { padding: 13px 4px; }
+      .hero { min-height: 600px; min-height: min(690px, calc(100svh - 95px)); }
+      .hero-content { padding: 62px 18px; }
+      .details { padding: 75px 0 79px; }
+      .timeline { grid-template-columns: 1fr 1fr; row-gap: 36px; }
+      .timeline::before { display: none; }
+      .timeline-item { padding: 0 9px; }
+      .timeline-dot { margin-bottom: 14px; }
+      .gallery { padding-bottom: 76px; }
+      .gallery-grid figure { min-height: 210px; }
+      .seating { padding: 75px 0 78px; }
+    }
+    @media (max-width: 440px) {
+      .container { width: calc(100% - 36px); }
+      .announcement { font-size: 9px; letter-spacing: .1em; }
+      .hero { min-height: 560px; }
+      .hero h1 { font-size: clamp(52px, 16vw, 73px); }
+      .eyebrow { letter-spacing: .18em; }
+      .timeline-item h3 { font-size: 20px; }
+      .gallery-grid { grid-template-columns: 1fr; gap: 9px; }
+      .gallery-grid figure { min-height: 225px; }
+      .footer-inner { justify-content: center; text-align: center; }
+      .footer-inner > * { width: 100%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+    }
+  </style>
 </head>
 <body>
+  <div class="announcement">Welcome to the celebration &nbsp;&middot;&nbsp; The Barn at Cave Springs</div>
+  <header class="site-header">
+    <nav class="container nav-wrap" aria-label="Main navigation">
+      <a class="wordmark" href="#top" aria-label="Adriana and Robert's wedding home">Adriana <span>&amp;</span> Robert</a>
+      <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-navigation">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      </button>
+      <div class="nav-links" id="site-navigation">
+        <a href="#top">Welcome</a>
+        <a href="#day">Schedule</a>
+        <a href="#seating">Seating</a>
+        <a href="#gallery">Gallery</a>
+        <a href="photos.html">Share photos</a>
+      </div>
+    </nav>
+  </header>
 
-    <div class="wrapper">
-        <h1>Welcome to Our Wedding!</h1>
-        <div class="date">October 30, 2027</div>
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <img class="hero-image" src="https://www.vintage-hotels.com/wp-content/uploads/2026/05/Vintage-Hotels-Cave-Springs-Fall-2021-33-1440x1192-jpg.webp" alt="" fetchpriority="high">
+      <div class="hero-shade"></div>
+      <div class="hero-content">
+        <p class="eyebrow">We're so glad you're here</p>
+        <h1 id="hero-title">Adriana <span>&amp; Robert</span></h1>
+        <p class="hero-date">Saturday &middot; October 30, 2027 &middot; The Barn at Cave Springs</p>
+        <a class="button button-light" href="#seating">Find your table <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </section>
 
-        <!-- PHOTO UPLOAD MODULE -->
-        <div class="card">
-            <h3>📸 Share Your Photos</h3>
-            <p>Help us capture the memories! Tap below to upload photos directly from your phone into our shared album.</p>
-            <!-- INSTRUCTION: Replace the URL below with your Google Photos album link -->
-            <a href="https://google.com" target="_blank" class="btn">Upload Photos</a>
+    <section class="seating" id="seating" aria-labelledby="seating-title">
+      <div class="container seating-panel">
+        <p class="section-eyebrow">Find your place</p>
+        <h2 class="section-title" id="seating-title">Seating chart</h2>
+        <p>Search your name to find your table. We're so happy you're here to celebrate with Adriana and Robert.</p>
+        <div class="search-box">
+          <label for="guest-search" class="section-eyebrow" style="display:block;text-align:left;margin:0 0 8px">Your name</label>
+          <input id="guest-search" type="search" autocomplete="off" placeholder="Start typing your first or last name" aria-describedby="guest-hint">
         </div>
+        <ul class="guest-results" id="guest-results" aria-live="polite"></ul>
+        <p class="guest-empty" id="guest-empty" hidden>No matching guest found. Try another spelling.</p>
+        <p class="guest-hint" id="guest-hint">Table assignments are not posted yet. Please check with a member of the wedding party.</p>
+      </div>
+    </section>
 
-        <!-- SEATING CHART MODULE -->
-        <div class="card">
-            <h3>🪑 Find Your Table</h3>
-            <p>Type your first or last name below to instantly see your table assignment.</p>
-            <input type="text" id="searchInput" onkeyup="searchSeating()" placeholder="Enter your name...">
-            
-            <ul id="seatingList">
-                <!-- INSTRUCTION: Add your guest list here following this format -->
-               <!-- SEATING CHART LIST START -->
-<li class="hidden">Laura Flannigan - Table TBD</li>
-<li class="hidden">Kelly Flannigan - Table TBD</li>
-<li class="hidden">Alana Still - Table TBD</li>
-<li class="hidden">Michael Still - Table TBD</li>
-<li class="hidden">Henrik Still - Table TBD</li>
-<li class="hidden">Nathan Ierullo - Table TBD</li>
-<li class="hidden">Emily Kerr - Table TBD</li>
-<li class="hidden">Corey Flannigan - Table TBD</li>
-<li class="hidden">Zac Flannigan - Table TBD</li>
-<li class="hidden">Kayla Flannigan - Table TBD</li>
-<li class="hidden">Berlin Flannigan - Table TBD</li>
-<li class="hidden">London Flannigan - Table TBD</li>
-<li class="hidden">Robert Dworak - Table TBD</li>
-<li class="hidden">Sharon Morrison - Table TBD</li>
-<li class="hidden">Matthew Houston - Table TBD</li>
-<li class="hidden">Erika Crawford - Table TBD</li>
-<li class="hidden">Brian Houston - Table TBD</li>
-<li class="hidden">Danika Elliott - Table TBD</li>
-<li class="hidden">Sarah Dworak - Table TBD</li>
-<li class="hidden">Jamie Wright - Table TBD</li>
-<li class="hidden">Lillian Dworak - Table TBD</li>
-<li class="hidden">Diane Houston - Table TBD</li>
-<li class="hidden">Marcia Bunn - Table TBD</li>
-<li class="hidden">Amanda Macdonald - Table TBD</li>
-<li class="hidden">Rose English - Table TBD</li>
-<li class="hidden">Ed English - Table TBD</li>
-<li class="hidden">Tabitha Callaghan - Table TBD</li>
-<li class="hidden">Tabitha's Husband - Table TBD</li>
-<li class="hidden">Tabitha Gylland - Table TBD</li>
-<li class="hidden">Tanya Morrison - Table TBD</li>
-<li class="hidden">Tyler Baldwin - Table TBD</li>
-<li class="hidden">Aaliyah - Table TBD</li>
-<li class="hidden">Jahvon - Table TBD</li>
-<li class="hidden">Sam DiLoreto - Table TBD</li>
-<li class="hidden">Brenda DiLoreto - Table TBD</li>
-<li class="hidden">Ennio DiLoreto - Table TBD</li>
-<li class="hidden">Nancy DiLoreto - Table TBD</li>
-<li class="hidden">Vivian Wright - Table TBD</li>
-<li class="hidden">Brian Wright - Table TBD</li>
-<li class="hidden">Kevin Mckinney - Table TBD</li>
-<li class="hidden">Kevin's Wife - Table TBD</li>
-<li class="hidden">Jacob Perusin - Table TBD</li>
-<li class="hidden">Brittany Marangoni - Table TBD</li>
-<li class="hidden">Brendan Younger - Table TBD</li>
-<li class="hidden">Sara Fidanza - Table TBD</li>
-<li class="hidden">Elaine Chubb - Table TBD</li>
-<li class="hidden">Elaine's Plus One - Table TBD</li>
-<li class="hidden">Steph Marsic - Table TBD</li>
-<li class="hidden">Carlos - Table TBD</li>
-<li class="hidden">Brittney Collura - Table TBD</li>
-<li class="hidden">Jake Stewart - Table TBD</li>
-<li class="hidden">Polly Psarakis - Table TBD</li>
-<li class="hidden">Miguel Walters - Table TBD</li>
-<li class="hidden">Ramona Canton - Table TBD</li>
-<li class="hidden">Samantha Pafford - Table TBD</li>
-<li class="hidden">Geoffery - Table TBD</li>
-<li class="hidden">Stephanie Pafford - Table TBD</li>
-<li class="hidden">Brett Pafford - Table TBD</li>
-<li class="hidden">Samantha - Table TBD</li>
-<li class="hidden">Amy Canton - Table TBD</li>
-<li class="hidden">Greg Canton - Table TBD</li>
-<li class="hidden">Jeffery Canton - Table TBD</li>
-<li class="hidden">Barbara Canton - Table TBD</li>
-<li class="hidden">Lisa Flannigan - Table TBD</li>
-<li class="hidden">Tina Pontes - Table TBD</li>
-<li class="hidden">Nelson Pontes - Table TBD</li>
-<li class="hidden">Tony Ierullo - Table TBD</li>
-<li class="hidden">Ruth - Table TBD</li>
-<li class="hidden">Vicky Leclerc - Table TBD</li>
-<li class="hidden">Zach - Table TBD</li>
-<li class="hidden">Zia Carol - Table TBD</li>
-<li class="hidden">Zio Ugo - Table TBD</li>
-<li class="hidden">Alana Kreller - Table TBD</li>
-<li class="hidden">Arturo - Table TBD</li>
-<li class="hidden">Linda Canton - Table TBD</li>
-<li class="hidden">John Canton - Table TBD</li>
-<li class="hidden">Paul Canton - Table TBD</li>
-<li class="hidden">Paul's Plus One - Table TBD</li>
-<li class="hidden">Billy - Table TBD</li>
-<li class="hidden">Karlo - Table TBD</li>
-<li class="hidden">Monica - Table TBD</li>
-<li class="hidden">Jim - Table TBD</li>
-<li class="hidden">Freda - Table TBD</li>
-<li class="hidden">Kostas - Table TBD</li>
-<li class="hidden">Debbi - Table TBD</li>
-<li class="hidden">John - Table TBD</li>
-<li class="hidden">Gordan Turner - Table TBD</li>
-<li class="hidden">Effie Turner - Table TBD</li>
-<li class="hidden">Stephanie Camacho - Table TBD</li>
-<li class="hidden">Jamie Camacho - Table TBD</li>
-<li class="hidden">Wayne Bunn - Table TBD</li>
-<li class="hidden">Connie Bunn - Table TBD</li>
-            </ul>
-            <div id="noResultsMessage" class="no-results hidden">No matching guest found. Try checking the spelling!</div>
+    <section class="details" id="day" aria-labelledby="day-title">
+      <div class="container">
+        <div class="section-heading">
+          <p class="section-eyebrow">The celebration</p>
+          <h2 class="section-title" id="day-title">Today's schedule</h2>
         </div>
+        <div class="timeline">
+          <article class="timeline-item">
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <p class="timeline-time">4:00 PM – 4:30 PM</p>
+            <h3>The ceremony</h3>
+            <p>We'll gather for the moment that starts it all.</p>
+          </article>
+          <article class="timeline-item">
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <p class="timeline-time">4:30 PM – 11:30 PM</p>
+            <h3>The reception</h3>
+            <p>Join us for an evening of dinner, drinks, and dancing.</p>
+          </article>
+        </div>
+        <p class="details-note"><a href="https://www.google.com/maps/search/?api=1&amp;query=The+Barn+at+Cave+Springs" target="_blank" rel="noopener noreferrer">The Barn at Cave Springs · Open in Maps &rarr;</a></p>
+      </div>
+    </section>
+
+    <section class="gallery" id="gallery" aria-labelledby="gallery-title">
+      <div class="container">
+        <div class="section-heading">
+          <p class="section-eyebrow">Take in the surroundings</p>
+          <h2 class="section-title" id="gallery-title">Around the venue</h2>
+        </div>
+        <div class="gallery-grid">
+          <figure><img src="https://www.vintage-hotels.com/wp-content/uploads/2026/04/20230624_154856-1536x1045-jpg.webp" alt="" loading="lazy"><figcaption>Celebrating together</figcaption></figure>
+          <figure><img src="https://www.vintage-hotels.com/wp-content/uploads/2026/04/IMG_9454-Edit-1536x1045-jpg.webp" alt="" loading="lazy"><figcaption>Beautiful moments</figcaption></figure>
+          <figure><img src="https://www.vintage-hotels.com/wp-content/uploads/2026/04/CSV-Ceremony-Afterglow-Images-1536x1029-jpg.webp" alt="" loading="lazy"><figcaption>Vineyard views</figcaption></figure>
+          <figure><img src="https://www.vintage-hotels.com/wp-content/uploads/2026/04/20230811_174545-1536x1056-jpg.webp" alt="" loading="lazy"><figcaption>At the Barn</figcaption></figure>
+        </div>
+        <p class="details-note">Venue photos courtesy of <a href="https://www.vintage-hotels.com/cave-spring-vineyard/" target="_blank" rel="noopener noreferrer">Vintage Hotels</a>. Photography credits listed by the venue: Afterglow Photography, Geoff Shaw Photography, and Loverly Photography.</p>
+        <p class="photo-invitation">Did you take a lovely photo today?
+          <br><a href="photos.html">Share your photos with us &rarr;</a>
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span class="footer-brand">Adriana &amp; Robert</span>
+      <p>Saturday, October 30, 2027</p>
+      <a class="back-top" href="#top">Back to top &uarr;</a>
     </div>
+  </footer>
 
-    <script>
-        function searchSeating() {
-            let input = document.getElementById('searchInput').value.trim().toLowerCase();
-            let li = document.getElementById('seatingList').getElementsByTagName('li');
-            let noResults = document.getElementById('noResultsMessage');
-            let foundCount = 0;
-            
-            for (let i = 0; i < li.length; i++) {
-                let text = li[i].textContent || li[i].innerText;
-                // Only show results once the user types at least 2 characters to avoid instant clutter
-                if (input.length > 1 && text.toLowerCase().indexOf(input) > -1) {
-                    li[i].classList.remove('hidden');
-                    foundCount++;
-                } else {
-                    li[i].classList.add('hidden');
-                }
-            }
+  <script>
+    const guestNames = [
+      "Laura Flannigan", "Kelly Flannigan", "Alana Still", "Michael Still", "Henrik Still",
+      "Nathan Ierullo", "Emily Kerr", "Corey Flannigan", "Zac Flannigan", "Kayla Flannigan",
+      "Berlin Flannigan", "London Flannigan", "Robert Dworak", "Sharon Morrison", "Matthew Houston",
+      "Erika Crawford", "Brian Houston", "Danika Elliott", "Sarah Dworak", "Jamie Wright",
+      "Lillian Dworak", "Diane Houston", "Marcia Bunn", "Amanda Macdonald", "Rose English",
+      "Ed English", "Tabitha Callaghan", "Tabitha's Husband", "Tabitha Gylland", "Tanya Morrison",
+      "Tyler Baldwin", "Aaliyah", "Jahvon", "Sam DiLoreto", "Brenda DiLoreto", "Ennio DiLoreto",
+      "Nancy DiLoreto", "Vivian Wright", "Brian Wright", "Kevin Mckinney", "Kevin's Wife",
+      "Jacob Perusin", "Brittany Marangoni", "Brendan Younger", "Sara Fidanza", "Elaine Chubb",
+      "Elaine's Plus One", "Steph Marsic", "Carlos", "Brittney Collura", "Jake Stewart",
+      "Polly Psarakis", "Miguel Walters", "Ramona Canton", "Samantha Pafford", "Geoffery",
+      "Stephanie Pafford", "Brett Pafford", "Samantha", "Amy Canton", "Greg Canton",
+      "Jeffery Canton", "Barbara Canton", "Lisa Flannigan", "Tina Pontes", "Nelson Pontes",
+      "Tony Ierullo", "Ruth", "Vicky Leclerc", "Zach", "Zia Carol", "Zio Ugo", "Alana Kreller",
+      "Arturo", "Linda Canton", "John Canton", "Paul Canton", "Paul's Plus One", "Billy", "Karlo",
+      "Monica", "Jim", "Freda", "Kostas", "Debbi", "John", "Gordan Turner", "Effie Turner",
+      "Stephanie Camacho", "Jamie Camacho", "Wayne Bunn", "Connie Bunn"
+    ];
 
-            // Show a message if they typo their name
-            if (input.length > 1 && foundCount === 0) {
-                noResults.classList.remove('hidden');
-            } else {
-                noResults.classList.add('hidden');
-            }
-        }
-    </script>
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navigation = document.querySelector("#site-navigation");
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+      menuToggle.setAttribute("aria-expanded", String(!isOpen));
+      menuToggle.setAttribute("aria-label", isOpen ? "Open navigation" : "Close navigation");
+      navigation.classList.toggle("is-open", !isOpen);
+    });
+
+    navigation.addEventListener("click", (event) => {
+      if (event.target.closest("a")) {
+        navigation.classList.remove("is-open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Open navigation");
+      }
+    });
+
+    const searchInput = document.querySelector("#guest-search");
+    const guestResults = document.querySelector("#guest-results");
+    const guestEmpty = document.querySelector("#guest-empty");
+    const guestHint = document.querySelector("#guest-hint");
+
+    // Add confirmed guest-to-table assignments here when the chart is finalized.
+    const seatingAssignments = {};
+
+    searchInput.addEventListener("input", () => {
+      const query = searchInput.value.trim().toLocaleLowerCase();
+      guestResults.replaceChildren();
+      guestEmpty.hidden = true;
+
+      if (query.length < 2) {
+        guestHint.hidden = false;
+        return;
+      }
+
+      const matches = guestNames.filter((name) => name.toLocaleLowerCase().includes(query));
+      guestHint.hidden = true;
+      guestEmpty.hidden = matches.length > 0;
+
+      matches.forEach((name) => {
+        const item = document.createElement("li");
+        const guestName = document.createElement("strong");
+        const table = document.createElement("span");
+        guestName.textContent = name;
+        table.textContent = seatingAssignments[name]
+          ? `Table ${seatingAssignments[name]}`
+          : "Your table assignment will be posted here once the seating chart is finalized.";
+        item.append(guestName, table);
+        guestResults.append(item);
+      });
+    });
+
+  </script>
 </body>
 </html>
