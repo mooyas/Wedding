@@ -1,0 +1,85 @@
+html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Wedding App</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; padding: 20px; background-color: #fcfbf9; color: #333; text-align: center; }
+        .wrapper { max-width: 450px; margin: 0 auto; }
+        h1 { color: #5c2c3a; margin-top: 10px; font-weight: 400; letter-spacing: 1px; }
+        .date { font-style: italic; color: #777; margin-bottom: 35px; }
+        .card { background: white; border-radius: 16px; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); margin-bottom: 25px; border: 1px solid #f0ebe4; }
+        h3 { margin-top: 0; color: #5c2c3a; font-size: 20px; }
+        p { color: #666; font-size: 14px; line-height: 1.5; }
+        .btn { display: inline-block; background: #5c2c3a; color: white; padding: 14px 28px; text-decoration: none; border-radius: 30px; font-weight: bold; margin-top: 10px; width: 80%; box-shadow: 0 2px 6px rgba(92,44,58,0.2); box-sizing: border-box; }
+        input[type="text"] { width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 30px; font-size: 16px; margin-bottom: 15px; outline: none; text-align: center; box-sizing: border-box; }
+        input[type="text"]:focus { border-color: #5c2c3a; }
+        .hidden { display: none; }
+        ul { list-style: none; padding: 0; margin: 10px 0 0 0; }
+        li { padding: 12px; border-bottom: 1px solid #f7f5f2; font-size: 18px; color: #444; font-weight: 500; }
+        li:last-child { border-bottom: none; }
+        .no-results { color: #999; font-style: italic; font-size: 14px; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <h1>Welcome to Our Wedding!</h1>
+        <div class="date">October 30, 2027</div>
+
+        <!-- PHOTO UPLOAD MODULE -->
+        <div class="card">
+            <h3>📸 Share Your Photos</h3>
+            <p>Help us capture the memories! Tap below to upload photos directly from your phone into our shared album.</p>
+            <!-- INSTRUCTION: Replace the URL below with your Google Photos album link -->
+            <a href="https://google.com" target="_blank" class="btn">Upload Photos</a>
+        </div>
+
+        <!-- SEATING CHART MODULE -->
+        <div class="card">
+            <h3>🪑 Find Your Table</h3>
+            <p>Type your first or last name below to instantly see your table assignment.</p>
+            <input type="text" id="searchInput" onkeyup="searchSeating()" placeholder="Enter your name...">
+            
+            <ul id="seatingList">
+                <!-- INSTRUCTION: Add your guest list here following this format -->
+                <li class="hidden">John Doe - Table 1</li>
+                <li class="hidden">Jane Smith - Table 2</li>
+                <li class="hidden">Robert Jones - Table 1</li>
+                <li class="hidden">Emily Brown - Table 3</li>
+                <li class="hidden">Michael Green - Table 4</li>
+            </ul>
+            <div id="noResultsMessage" class="no-results hidden">No matching guest found. Try checking the spelling!</div>
+        </div>
+    </div>
+
+    <script>
+        function searchSeating() {
+            let input = document.getElementById('searchInput').value.trim().toLowerCase();
+            let li = document.getElementById('seatingList').getElementsByTagName('li');
+            let noResults = document.getElementById('noResultsMessage');
+            let foundCount = 0;
+            
+            for (let i = 0; i < li.length; i++) {
+                let text = li[i].textContent || li[i].innerText;
+                // Only show results once the user types at least 2 characters to avoid instant clutter
+                if (input.length > 1 && text.toLowerCase().indexOf(input) > -1) {
+                    li[i].classList.remove('hidden');
+                    foundCount++;
+                } else {
+                    li[i].classList.add('hidden');
+                }
+            }
+
+            // Show a message if they typo their name
+            if (input.length > 1 && foundCount === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
