@@ -16,12 +16,15 @@ Then visit `http://localhost:8000`.
 
 - Burgundy day-of welcome page with venue and event schedule
 - Guest-facing seating lookup using the 92-name guest list, with a read-only meal choice for exact-name matches
+- Dedicated responsive Seating Plan page, ready for the couple's floorplan
 - Full-bleed venue-photo backdrops and map directions
 - A separate guest photo-sharing page, linked from the main navigation and photo gallery
 
 The existing 92 guest names are preserved for seating search. The ceremony is scheduled for 4:00–4:30 PM and the reception for 4:30–11:30 PM. Seating assignments have not been provided yet; matching guests are told their table details will appear once the chart is finalized. Add confirmed guest-to-table pairs to the `seatingAssignments` object in `index.html`.
 
 The guest list and couple-entered meal choices are included in the public page source. Guests cannot edit meal choices. After receiving an RSVP, update the `mealChoices` object in `index.html` using the guest's exact listed name as the key and the confirmed meal choice as the value, then republish the site. Leave guests out of the object until their choice is confirmed; the lookup shows “Meal choice will appear here after your RSVP is received” otherwise. Meal choices are shown in the page UI only after an exact full-name search, but this static site does not provide authentication and its public source remains inspectable. GitHub Pages has no shared database or guest authentication.
+
+`seating-plan.html` is the dedicated visual floorplan page. It currently shows a clear placeholder because the couple has not provided a finalized layout; replace the placeholder panel with the supplied seating-plan image or layout when available. Guests can use the main page's exact-name lookup for their personal assignment in the meantime.
 
 `photos.html` is the guest contribution page for a collaborative photo album. To activate its QR code, create a shared album that allows guest contributions and paste its public HTTPS link into `SHARED_ALBUM_URL` near the bottom of `photos.html`. The page intentionally shows a setup message instead of a QR code until a real link is configured. QR generation uses QRCode.js from a CDN, so the photo page needs an internet connection.
 
