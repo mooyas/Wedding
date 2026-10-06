@@ -45,19 +45,14 @@
     .plan-heading h2 { margin: 0; color: var(--burgundy-dark); font: 500 23px/1.25 var(--serif); }
     .diagram-wrap { padding: clamp(14px, 3vw, 28px); background: #fbf7f0; }
     .floorplan { display: block; width: min(100%, 980px); height: auto; margin: 0 auto; }
-    .floorplan .chair-shadow { fill: #8b7568; opacity: .045; }
-    .floorplan .chair-back { fill: url(#chair-back-gradient); stroke: #b7836e; stroke-width: .8; }
-    .floorplan .chair-seat { fill: url(#chair-seat-gradient); stroke: #c9a58b; stroke-width: .75; }
-    .floorplan .chair-detail { fill: none; stroke: #fff8ed; stroke-width: .8; stroke-linecap: round; opacity: .9; }
-    .floorplan .chair-leg { fill: none; stroke: #b99572; stroke-width: 1.1; stroke-linecap: round; }
-    .floorplan .table-shadow { fill: #a8957d; opacity: .08; }
-    .floorplan .tabletop { fill: url(#tabletop-gradient); stroke: #b58d76; stroke-width: 1.2; }
-    .floorplan .table-linen { fill: none; stroke: #eadfce; stroke-width: 1; }
+    .floorplan .chair-back { fill: url(#chair-back-gradient); stroke: #d7b2a0; stroke-width: .7; }
+    .floorplan .chair-seat { fill: url(#chair-seat-gradient); stroke: #d8c4ae; stroke-width: .65; }
+    .floorplan .chair-detail { fill: none; stroke: #fffaf2; stroke-width: .7; stroke-linecap: round; opacity: .9; }
+    .floorplan .chair-leg { fill: none; stroke: #d0b99b; stroke-width: .85; stroke-linecap: round; }
+    .floorplan .tabletop { fill: url(#tabletop-gradient); stroke: #d5c3ad; stroke-width: 1; }
+    .floorplan .table-linen { fill: none; stroke: #eee5d8; stroke-width: 1; }
     .floorplan .table-label { fill: #512333; font-family: var(--sans); font-size: 8px; font-weight: 600; text-anchor: middle; }
     .floorplan .table-sub { fill: #8b6b5d; font-family: var(--sans); font-size: 6.5px; font-weight: 500; text-anchor: middle; }
-    .floorplan .center-green { fill: #89977b; stroke: #75836a; stroke-width: .45; }
-    .floorplan .center-rust { fill: #d28d70; stroke: #b97860; stroke-width: .4; }
-    .floorplan .center-gold { fill: #e5c17f; stroke: #c4a36b; stroke-width: .4; }
     .legend { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 18px; border-top: 1px solid var(--line); background: #fffdfb; padding: 18px clamp(18px, 4vw, 34px); }
     .legend-item { display: flex; align-items: center; gap: 9px; color: #64565a; font-size: 12px; }
     .legend-swatch { flex: 0 0 auto; display: inline-block; width: 13px; height: 13px; border: 1px solid #804638; border-radius: 50%; background: #bd7559; }
@@ -135,19 +130,7 @@
               <path class="chair-back" d="M-6.3 -6.2Q-6.3 -10 0 -10.8Q6.3 -10 6.3 -6.2V-5.9Q6.3 -5 -6.3 -5.9Z"></path>
               <path class="chair-detail" d="M-3.5 -8.3 Q0 -7 3.5 -8.3"></path>
             </g>
-            <g id="centerpiece">
-              <path d="M0 1 -8 -5M0 1 8 -6M0 1 0 -9M0 1 -9 2M0 1 8 3" fill="none" stroke="#75826a" stroke-width="1"></path>
-              <ellipse class="center-green" cx="-7" cy="-5" rx="3.2" ry="1.8" transform="rotate(28 -7 -5)"></ellipse>
-              <ellipse class="center-green" cx="7" cy="-6" rx="3.2" ry="1.8" transform="rotate(-28 7 -6)"></ellipse>
-              <ellipse class="center-green" cx="0" cy="-8" rx="3.3" ry="1.8"></ellipse>
-              <ellipse class="center-green" cx="-8" cy="2" rx="3.2" ry="1.8" transform="rotate(-12 -8 2)"></ellipse>
-              <ellipse class="center-green" cx="8" cy="3" rx="3.2" ry="1.8" transform="rotate(15 8 3)"></ellipse>
-              <circle class="center-rust" cx="-2.5" cy="-1" r="2.7"></circle>
-              <circle class="center-gold" cx="2.6" cy="1.4" r="2.4"></circle>
-              <circle cx=".4" cy="-3" r="1.9" fill="#c89066"></circle>
-            </g>
             <g id="large-round">
-              <circle class="table-shadow" cx="1.5" cy="3" r="44.5"></circle>
               <g aria-hidden="true">
                 <use href="#chair" transform="rotate(0) translate(0 -51)"></use>
                 <use href="#chair" transform="rotate(30) translate(0 -51)"></use>
@@ -164,12 +147,10 @@
               </g>
               <circle class="tabletop" r="42"></circle>
               <circle class="table-linen" r="38"></circle>
-              <use href="#centerpiece" transform="translate(0 -16) scale(.72)"></use>
               <text class="table-label" y="9">72″ ROUND</text>
               <text class="table-sub" y="19">UP TO 12</text>
             </g>
             <g id="small-round">
-              <circle class="table-shadow" cx="1.2" cy="2.5" r="37"></circle>
               <g aria-hidden="true">
                 <use href="#chair" transform="rotate(0) translate(0 -44)"></use>
                 <use href="#chair" transform="rotate(45) translate(0 -44)"></use>
@@ -182,14 +163,12 @@
               </g>
               <circle class="tabletop" r="35"></circle>
               <circle class="table-linen" r="31.5"></circle>
-              <use href="#centerpiece" transform="translate(0 -13) scale(.6)"></use>
               <text class="table-label" y="8">60″ ROUND</text>
               <text class="table-sub" y="17">UP TO 8</text>
             </g>
             <g id="long-table">
               <use href="#chair" transform="translate(-17 -22) scale(.8)"></use>
               <use href="#chair" transform="translate(17 -22) scale(.8)"></use>
-              <rect class="table-shadow" x="-31" y="-10" width="64" height="25" rx="4"></rect>
               <rect x="-31" y="-12" width="62" height="24" rx="4" fill="#e6c997" stroke="#8a5b37" stroke-width="1.4"></rect>
               <path d="M-26 -7H26M-26 7H26" stroke="#f8edd9" stroke-width=".7" opacity=".85"></path>
               <text class="table-label" y="3">6-FOOT TABLE</text>
