@@ -211,13 +211,8 @@
     .guest-results span { display: block; margin-top: 5px; color: var(--muted); font-size: 13px; }
     .guest-empty { margin: 13px 0 0; color: #8e5160; font-size: 13px; }
     .guest-hint { margin: 11px 0 0; color: #85827e; font-size: 12px; }
-    .meal-choice { display: grid; gap: 9px; margin-top: 15px; border-top: 1px solid var(--line); padding-top: 14px; }
-    .meal-choice label { color: var(--burgundy-dark); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
-    .meal-choice select { width: 100%; min-height: 46px; border: 1px solid #cdb9bd; border-radius: 3px; background: var(--white); padding: 10px 12px; color: var(--ink); font: inherit; }
-    .meal-choice button { justify-self: start; min-height: 42px; border: 0; border-radius: 2px; background: var(--burgundy-dark); padding: 10px 16px; color: white; font: 600 11px var(--sans); letter-spacing: .08em; text-transform: uppercase; cursor: pointer; }
-    .meal-choice button:hover { background: var(--burgundy); }
-    .meal-choice-status { min-height: 18px; margin: 0 !important; color: #766a6f !important; font-size: 12px !important; }
-    .meal-privacy-note { max-width: 600px; margin: 20px auto 0 !important; border-left: 2px solid #b99591; background: #f3eae8; padding: 12px 14px; color: #67575d !important; font-size: 12px; text-align: left; }
+    .guest-meal { margin-top: 13px; border-top: 1px solid var(--line); padding-top: 11px; color: #5e5056; font-size: 13px; }
+    .guest-meal strong { display: inline; color: var(--burgundy-dark); font: 700 11px var(--sans); letter-spacing: .07em; text-transform: uppercase; }
 
     .footer { border-top: 1px solid var(--line); padding: 32px 0; }
     .footer-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; }
@@ -313,7 +308,7 @@
         <ul class="guest-results" id="guest-results" aria-live="polite"></ul>
         <p class="guest-empty" id="guest-empty" hidden>No matching guest found. Try another spelling.</p>
         <p class="guest-hint" id="guest-hint">Table assignments are not posted yet. Please check with a member of the wedding party.</p>
-        <p class="meal-privacy-note">Meal categories are provisional. Preferences are saved only in this browser and are not sent to the couple or synced to other devices. Search your full name to view or update your preference. This static website cannot verify identity, so avoid entering your choice on a shared device; selections are not private from other people using that browser.</p>
+        <p class="guest-hint">After your RSVP is received, the couple will add your meal choice here. Search your exact full name to view the choice recorded for you.</p>
       </div>
     </section>
 
@@ -416,74 +411,8 @@
 
     // Add confirmed guest-to-table assignments here when the chart is finalized.
     const seatingAssignments = {};
-    const mealChoicePrefix = "wedding-meal-choice:";
-    const mealOptions = [
-      { value: "standard", label: "Standard menu" },
-      { value: "vegetarian", label: "Vegetarian" },
-      { value: "vegan", label: "Vegan" },
-      { value: "dietary-request", label: "Other dietary request (please contact the couple)" }
-    ];
-
-    function readMealChoice(name) {
-      try {
-        const savedChoice = localStorage.getItem(`${mealChoicePrefix}${name}`);
-        return {
-          value: mealOptions.some((option) => option.value === savedChoice) ? savedChoice : "",
-          error: false
-        };
-      } catch (error) {
-        console.error("Unable to read the meal preference from this browser.", error);
-        return { value: "", error: true };
-      }
-    }
-
-    function createMealChoiceForm(name) {
-      const form = document.createElement("form");
-      form.className = "meal-choice";
-      form.dataset.guestName = name;
-
-      const label = document.createElement("label");
-      const select = document.createElement("select");
-      const fieldId = `meal-choice-${guestNames.indexOf(name)}`;
-      label.htmlFor = fieldId;
-      label.textContent = "Your meal preference";
-      select.id = fieldId;
-      select.required = true;
-      select.setAttribute("aria-label", `Meal preference for ${name}`);
-
-      const placeholder = document.createElement("option");
-      placeholder.value = "";
-      placeholder.textContent = "Choose a meal preference";
-      select.append(placeholder);
-
-      mealOptions.forEach((option) => {
-        const item = document.createElement("option");
-        item.value = option.value;
-        item.textContent = option.label;
-        select.append(item);
-      });
-
-      const mealPreference = readMealChoice(name);
-      const savedChoice = mealPreference.value;
-      select.value = savedChoice;
-
-      const status = document.createElement("p");
-      status.className = "meal-choice-status";
-      status.setAttribute("role", "status");
-      status.setAttribute("aria-live", "polite");
-      status.textContent = mealPreference.error
-        ? "Browser storage is unavailable; meal preference cannot be loaded."
-        : savedChoice
-          ? `Saved on this browser: ${mealOptions.find((option) => option.value === savedChoice).label}.`
-          : "No meal preference saved on this browser yet.";
-
-      const button = document.createElement("button");
-      button.type = "submit";
-      button.textContent = savedChoice ? "Update preference" : "Save preference";
-
-      form.append(label, select, button, status);
-      return form;
-    }
+    // The couple maintains confirmed meal choices here and republishes the site.
+    const mealChoices = {};
 
     searchInput.addEventListener("input", () => {
       const query = searchInput.value.trim().toLocaleLowerCase();
@@ -501,7 +430,7 @@
 
       const exactMatch = matches.some((name) => name.toLocaleLowerCase() === query);
       if (!exactMatch) {
-        guestHint.textContent = "Enter your full name to view or update your meal preference.";
+        guestHint.textContent = "Enter your exact full name to view your recorded meal choice.";
         guestHint.hidden = matches.length === 0;
       } else {
         guestHint.textContent = "Table assignments are not posted yet. Please check with a member of the wedding party.";
@@ -517,35 +446,15 @@
           : "Your table assignment will be posted here once the seating chart is finalized.";
         item.append(guestName, table);
         if (name.toLocaleLowerCase() === query) {
-          item.append(createMealChoiceForm(name));
+          const meal = document.createElement("p");
+          const mealLabel = document.createElement("strong");
+          meal.className = "guest-meal";
+          mealLabel.textContent = "Meal choice: ";
+          meal.append(mealLabel, document.createTextNode(mealChoices[name] || "Meal choice will appear here after your RSVP is received."));
+          item.append(meal);
         }
         guestResults.append(item);
       });
-    });
-
-    guestResults.addEventListener("submit", (event) => {
-      const form = event.target.closest(".meal-choice");
-      if (!form) return;
-      event.preventDefault();
-
-      const name = form.dataset.guestName;
-      const select = form.querySelector("select");
-      const status = form.querySelector(".meal-choice-status");
-      const button = form.querySelector("button");
-
-      if (!guestNames.includes(name) || !mealOptions.some((option) => option.value === select.value)) {
-        status.textContent = "Choose a valid meal preference before saving.";
-        return;
-      }
-
-      try {
-        localStorage.setItem(`${mealChoicePrefix}${name}`, select.value);
-        status.textContent = `Saved on this browser: ${mealOptions.find((option) => option.value === select.value).label}.`;
-        button.textContent = "Update preference";
-      } catch (error) {
-        console.error("Unable to save the meal preference in this browser.", error);
-        status.textContent = "Could not save on this browser. Check browser storage settings and try again.";
-      }
     });
 
   </script>
