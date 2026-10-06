@@ -16,7 +16,7 @@ Then visit `http://localhost:8000`.
 
 - Burgundy day-of welcome page with venue and event schedule
 - Guest-facing seating lookup using the 92-name guest list, with a read-only meal choice for exact-name matches
-- Dedicated responsive Seating Plan page with the venue's maximum-capacity floorplan PDF
+- Dedicated responsive Seating Plan page with the venue layout PDF
 - Full-bleed venue-photo backdrops and map directions
 - A separate guest photo-sharing page, linked from the main navigation and photo gallery
 
@@ -24,7 +24,7 @@ The existing 92 guest names are preserved for seating search. The ceremony is sc
 
 The guest list and couple-entered meal choices are included in the public page source. Guests cannot edit meal choices. After receiving an RSVP, update the `mealChoices` object in `index.html` using the guest's exact listed name as the key and the confirmed meal choice as the value, then republish the site. Leave guests out of the object until their choice is confirmed; the lookup shows “Meal choice will appear here after your RSVP is received” otherwise. Meal choices are shown in the page UI only after an exact full-name search, but this static site does not provide authentication and its public source remains inspectable. GitHub Pages has no shared database or guest authentication.
 
-`seating-plan.html` embeds the supplied Cave Spring Barn maximum seating floorplan (`assets/cave-spring-barn-maximum-seating.pdf`) and provides open/download links. The PDF describes a maximum seating layout for 90 guests; it is a venue capacity reference, not the couple's final table assignments. Guests can use the main page's exact-name lookup for their personal assignment while the couple finalizes the chart.
+`seating-plan.html` embeds the supplied venue layout PDF (`assets/cave-spring-barn-maximum-seating.pdf`) and provides open/download links. The PDF shows capacity for up to 90 guests; it is a venue reference, not the couple's final table assignments. Guests can use the main page's exact-name lookup for their personal assignment while the couple finalizes the chart.
 
 `photos.html` is the guest contribution page for a collaborative photo album. To activate its QR code, create a shared album that allows guest contributions and paste its public HTTPS link into `SHARED_ALBUM_URL` near the bottom of `photos.html`. The page intentionally shows a setup message instead of a QR code until a real link is configured. QR generation uses QRCode.js from a CDN, so the photo page needs an internet connection.
 
