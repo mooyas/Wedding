@@ -45,19 +45,19 @@
     .plan-heading h2 { margin: 0; color: var(--burgundy-dark); font: 500 23px/1.25 var(--serif); }
     .diagram-wrap { padding: clamp(14px, 3vw, 28px); background: #fbf7f0; }
     .floorplan { display: block; width: min(100%, 980px); height: auto; margin: 0 auto; }
-    .floorplan .chair-shadow { fill: #382a30; opacity: .12; }
-    .floorplan .chair-back { fill: #aa6654; stroke: #75433b; stroke-width: 1.1; }
-    .floorplan .chair-seat { fill: #e1b98a; stroke: #75433b; stroke-width: .9; }
-    .floorplan .chair-detail { fill: none; stroke: #f7e6cf; stroke-width: .8; stroke-linecap: round; }
-    .floorplan .chair-leg { fill: none; stroke: #725346; stroke-width: 1.15; stroke-linecap: round; }
-    .floorplan .table-shadow { fill: #382a30; opacity: .12; }
-    .floorplan .tabletop { fill: #fffdf9; stroke: #75424a; stroke-width: 1.6; }
-    .floorplan .table-linen { fill: none; stroke: #e6d9c8; stroke-width: 1; }
+    .floorplan .chair-shadow { fill: #8b7568; opacity: .045; }
+    .floorplan .chair-back { fill: url(#chair-back-gradient); stroke: #b7836e; stroke-width: .8; }
+    .floorplan .chair-seat { fill: url(#chair-seat-gradient); stroke: #c9a58b; stroke-width: .75; }
+    .floorplan .chair-detail { fill: none; stroke: #fff8ed; stroke-width: .8; stroke-linecap: round; opacity: .9; }
+    .floorplan .chair-leg { fill: none; stroke: #b99572; stroke-width: 1.1; stroke-linecap: round; }
+    .floorplan .table-shadow { fill: #a8957d; opacity: .08; }
+    .floorplan .tabletop { fill: url(#tabletop-gradient); stroke: #b58d76; stroke-width: 1.2; }
+    .floorplan .table-linen { fill: none; stroke: #eadfce; stroke-width: 1; }
     .floorplan .table-label { fill: #512333; font-family: var(--sans); font-size: 8px; font-weight: 600; text-anchor: middle; }
     .floorplan .table-sub { fill: #8b6b5d; font-family: var(--sans); font-size: 6.5px; font-weight: 500; text-anchor: middle; }
-    .floorplan .center-green { fill: #75826a; stroke: #617057; stroke-width: .6; }
-    .floorplan .center-rust { fill: #bd7559; stroke: #9a5848; stroke-width: .5; }
-    .floorplan .center-gold { fill: #d7ac69; stroke: #a9824f; stroke-width: .5; }
+    .floorplan .center-green { fill: #89977b; stroke: #75836a; stroke-width: .45; }
+    .floorplan .center-rust { fill: #d28d70; stroke: #b97860; stroke-width: .4; }
+    .floorplan .center-gold { fill: #e5c17f; stroke: #c4a36b; stroke-width: .4; }
     .legend { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 18px; border-top: 1px solid var(--line); background: #fffdfb; padding: 18px clamp(18px, 4vw, 34px); }
     .legend-item { display: flex; align-items: center; gap: 9px; color: #64565a; font-size: 12px; }
     .legend-swatch { flex: 0 0 auto; display: inline-block; width: 13px; height: 13px; border: 1px solid #804638; border-radius: 50%; background: #bd7559; }
@@ -114,13 +114,26 @@
           <title id="diagram-title">Wedding reception tables and bar layout</title>
           <desc id="diagram-description">Six 72-inch round tables for up to 12 guests each, two 60-inch round tables for up to 8 guests each, one six-foot table with two seats, and the bar location. This is a 90-guest maximum-capacity layout, not assigned seating.</desc>
           <defs>
+            <linearGradient id="chair-back-gradient" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#e2b9a2"></stop>
+              <stop offset=".52" stop-color="#d09a82"></stop>
+              <stop offset="1" stop-color="#c48a74"></stop>
+            </linearGradient>
+            <linearGradient id="chair-seat-gradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#fff3df"></stop>
+              <stop offset="1" stop-color="#ead5bd"></stop>
+            </linearGradient>
+            <linearGradient id="tabletop-gradient" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#fffefb"></stop>
+              <stop offset="1" stop-color="#f7efe3"></stop>
+            </linearGradient>
             <g id="chair">
-              <ellipse class="chair-shadow" cx="1.1" cy="2.3" rx="7.2" ry="8.5"></ellipse>
-              <path class="chair-leg" d="M-3 1.5 -4.5 7.5M3 1.5 4.5 7.5"></path>
-              <rect class="chair-seat" x="-5.8" y="-3" width="11.6" height="8.5" rx="3.2"></rect>
-              <path class="chair-detail" d="M-3.5 -.9 Q0 .4 3.5 -.9"></path>
-              <rect class="chair-back" x="-7" y="-10.5" width="14" height="5.3" rx="2.6"></rect>
-              <path class="chair-detail" d="M-4.2 -8.8 Q0 -7.4 4.2 -8.8"></path>
+              <ellipse class="chair-shadow" cx=".8" cy="2.3" rx="6.4" ry="7.8"></ellipse>
+              <path class="chair-leg" d="M-3.2 1 -4.5 7M3.2 1 4.5 7"></path>
+              <path class="chair-seat" d="M-5.8 -3.3 Q-5.8 -4.7 -4.2 -4.7H4.2Q5.8 -4.7 5.8 -3.3V2Q5.8 4.7 3.2 4.7H-3.2Q-5.8 4.7 -5.8 2Z"></path>
+              <path class="chair-detail" d="M-3.7 -2.8 Q0 -1.8 3.7 -2.8"></path>
+              <path class="chair-back" d="M-6.3 -6.2Q-6.3 -10 0 -10.8Q6.3 -10 6.3 -6.2V-5.9Q6.3 -5 -6.3 -5.9Z"></path>
+              <path class="chair-detail" d="M-3.5 -8.3 Q0 -7 3.5 -8.3"></path>
             </g>
             <g id="centerpiece">
               <path d="M0 1 -8 -5M0 1 8 -6M0 1 0 -9M0 1 -9 2M0 1 8 3" fill="none" stroke="#75826a" stroke-width="1"></path>
