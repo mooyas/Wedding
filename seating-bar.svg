@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 240" role="img" aria-labelledby="bar-title">
+  <title id="bar-title">Wooden wedding reception bar counter</title>
+  <defs>
+    <linearGradient id="counter" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d4aa72"/>
+      <stop offset=".48" stop-color="#bd8957"/>
+      <stop offset="1" stop-color="#9c6845"/>
+    </linearGradient>
+    <linearGradient id="cabinet" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#854d48"/>
+      <stop offset="1" stop-color="#60353a"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fffdf5" stop-opacity=".9"/>
+      <stop offset="1" stop-color="#d9e6e1" stop-opacity=".65"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="253" cy="196" rx="211" ry="22" fill="#412d2b" opacity=".14"/>
+  <rect x="40" y="53" width="420" height="139" rx="15" fill="#70433b" opacity=".28"/>
+  <rect x="35" y="42" width="420" height="140" rx="13" fill="url(#cabinet)" stroke="#4e3031" stroke-width="3"/>
+  <path d="M54 55h382v113H54z" fill="none" stroke="#b7865e" stroke-width="2" opacity=".8"/>
+  <path d="M60 64h85v95H60zm105 0h85v95h-85zm105 0h85v95h-85zm105 0h55v95h-55z" fill="none" stroke="#d0a779" stroke-width="2" opacity=".72"/>
+  <path d="M148 103v15m105-15v15m105-15v15m75-15v15" stroke="#dfbf8e" stroke-width="4" stroke-linecap="round"/>
+  <rect x="24" y="29" width="442" height="43" rx="11" fill="#684533" opacity=".42"/>
+  <rect x="22" y="21" width="442" height="43" rx="10" fill="url(#counter)" stroke="#795237" stroke-width="3"/>
+  <path d="M39 30h407M39 54h407" stroke="#e2c291" stroke-width="2" opacity=".75"/>
+  <path d="M57 41c40-9 67 9 106 0s67 9 105 0 67 9 105 0 50 3 73 0" fill="none" stroke="#8b5d3d" stroke-width="2" opacity=".42"/>
+  <rect x="187" y="130" width="116" height="36" rx="6" fill="#f3e6d4" stroke="#cda779" stroke-width="2"/>
+  <text x="245" y="154" fill="#68433e" font-family="Georgia,serif" font-size="19" letter-spacing="3" text-anchor="middle">BAR</text>
+  <g aria-hidden="true">
+    <rect x="83" y="4" width="25" height="18" rx="4" fill="#41685a" stroke="#28483d" stroke-width="2"/>
+    <path d="M88 4V-1h15v5" fill="#e8d9b2" stroke="#28483d" stroke-width="2"/>
+    <rect x="89" y="0" width="13" height="4" rx="1" fill="#efe2c4"/>
+    <rect x="132" y="3" width="23" height="19" rx="5" fill="#743c42" stroke="#512b32" stroke-width="2"/>
+    <path d="M138 3V-2h11v5" fill="#e8d9b2" stroke="#512b32" stroke-width="2"/>
+    <rect x="139" y="-1" width="9" height="4" rx="1" fill="#efe2c4"/>
+    <path d="M191 8h23l-3 16h-17z" fill="url(#glass)" stroke="#a7aaa1" stroke-width="2"/>
+    <path d="M194 12h17" stroke="#d3ad73" stroke-width="3"/>
+    <path d="M227 8h23l-3 16h-17z" fill="url(#glass)" stroke="#a7aaa1" stroke-width="2"/>
+    <path d="M230 12h17" stroke="#c17a57" stroke-width="3"/>
+    <rect x="283" y="2" width="22" height="21" rx="4" fill="#41685a" stroke="#28483d" stroke-width="2"/>
+    <path d="M288 2v-5h12v5" fill="#e8d9b2" stroke="#28483d" stroke-width="2"/>
+    <rect x="291" y="-3" width="6" height="4" fill="#efe2c4"/>
+    <path d="M345 8h25l-3 16h-19z" fill="url(#glass)" stroke="#a7aaa1" stroke-width="2"/>
+    <path d="M348 12h19" stroke="#d2a45e" stroke-width="3"/>
+  </g>
+</svg>
