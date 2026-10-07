@@ -43,21 +43,14 @@
     .plan-card { overflow: hidden; border: 1px solid var(--line); background: var(--white); box-shadow: 0 16px 48px rgba(81, 35, 51, .07); }
     .plan-heading { border-bottom: 1px solid var(--line); padding: 18px clamp(18px, 4vw, 34px); }
     .plan-heading h2 { margin: 0; color: var(--burgundy-dark); font: 500 23px/1.25 var(--serif); }
-    .diagram-wrap { padding: clamp(14px, 3vw, 28px); background: #fbf7f0; }
-    .floorplan { display: block; width: min(100%, 980px); height: auto; margin: 0 auto; }
-    .floorplan .chair-back { fill: url(#chair-back-gradient); stroke: #d7b2a0; stroke-width: .7; }
-    .floorplan .chair-seat { fill: url(#chair-seat-gradient); stroke: #d8c4ae; stroke-width: .65; }
-    .floorplan .chair-detail { fill: none; stroke: #fffaf2; stroke-width: .7; stroke-linecap: round; opacity: .9; }
-    .floorplan .chair-leg { fill: none; stroke: #d0b99b; stroke-width: .85; stroke-linecap: round; }
-    .floorplan .tabletop { fill: url(#tabletop-gradient); stroke: #d5c3ad; stroke-width: 1; }
-    .floorplan .table-linen { fill: none; stroke: #eee5d8; stroke-width: 1; }
-    .floorplan .table-label { fill: #512333; font-family: var(--sans); font-size: 8px; font-weight: 600; text-anchor: middle; }
-    .floorplan .table-sub { fill: #8b6b5d; font-family: var(--sans); font-size: 6.5px; font-weight: 500; text-anchor: middle; }
+    .diagram-wrap { overflow-x: auto; padding: clamp(12px, 2vw, 22px); background: #fff; }
+    .floorplan { display: block; width: min(100%, 1000px); min-width: 620px; height: auto; margin: 0 auto; }
     .legend { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 18px; border-top: 1px solid var(--line); background: #fffdfb; padding: 18px clamp(18px, 4vw, 34px); }
     .legend-item { display: flex; align-items: center; gap: 9px; color: #64565a; font-size: 12px; }
     .legend-swatch { flex: 0 0 auto; display: inline-block; width: 13px; height: 13px; border: 1px solid #804638; border-radius: 50%; background: #bd7559; }
     .legend-swatch.small { width: 11px; height: 11px; background: #d69a65; }
     .legend-swatch.long { width: 16px; height: 9px; border-radius: 2px; background: #e2b77c; }
+    .legend-swatch.head { width: 16px; height: 9px; border: 1px solid #78533e; border-radius: 2px; background: #e6d3af; box-shadow: inset 0 2px #7a4052; }
     .legend-swatch.bar { width: 17px; height: 10px; border: 0; border-radius: 2px; background: #75424a; }
     .plan-footnote { margin: 0; border-top: 1px solid var(--line); background: #fbf8f6; padding: 13px 20px; color: #82757a; font-size: 11px; text-align: center; }
     .lookup-card { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 24px; border: 1px solid var(--line); background: #f1e7e6; padding: clamp(20px, 4vw, 30px); }
@@ -72,6 +65,7 @@
       .nav-links { gap: 11px 16px; }
       .nav-links a { font-size: 9px; }
       .announcement { font-size: 9px; }
+      .floorplan { min-width: 620px; }
       .legend { grid-template-columns: 1fr; }
       .lookup-card { align-items: flex-start; flex-direction: column; gap: 15px; }
     }
@@ -105,99 +99,133 @@
         <h2 id="layout-title">Tables &amp; bar</h2>
       </div>
       <div class="diagram-wrap">
-        <svg class="floorplan" viewBox="0 0 542 432" role="img" aria-labelledby="diagram-title diagram-description">
+        <svg class="floorplan" viewBox="0 0 1200 1300" role="img" aria-labelledby="diagram-title diagram-description">
           <title id="diagram-title">Wedding reception tables and bar layout</title>
-          <desc id="diagram-description">Six 72-inch round tables for up to 12 guests each, two 60-inch round tables for up to 8 guests each, one six-foot table with two seats, and the bar location. This is a 90-guest maximum-capacity layout, not assigned seating.</desc>
+          <desc id="diagram-description">Six 72-inch round tables each have twelve upholstered chairs; two 60-inch round tables each have eight chairs. All are drawn with ivory linen, warm wood trim, and soft rose-upholstered chairs to coordinate with the couple's two-seat decorated head table. The bar is also shown. This is a 90-guest maximum-capacity reference, not assigned seating.</desc>
           <defs>
-            <linearGradient id="chair-back-gradient" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#e2b9a2"></stop>
-              <stop offset=".52" stop-color="#d09a82"></stop>
-              <stop offset="1" stop-color="#c48a74"></stop>
+            <linearGradient id="round-linen" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#fffefa"></stop>
+              <stop offset="1" stop-color="#f1e6d7"></stop>
             </linearGradient>
-            <linearGradient id="chair-seat-gradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#fff3df"></stop>
-              <stop offset="1" stop-color="#ead5bd"></stop>
+            <linearGradient id="chair-wood" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#c8a47b"></stop>
+              <stop offset="1" stop-color="#96704f"></stop>
             </linearGradient>
-            <linearGradient id="tabletop-gradient" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#fffefb"></stop>
-              <stop offset="1" stop-color="#f7efe3"></stop>
+            <linearGradient id="chair-upholstery" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#f8eee3"></stop>
+              <stop offset="1" stop-color="#e2c8b7"></stop>
             </linearGradient>
-            <g id="chair">
-              <ellipse class="chair-shadow" cx=".8" cy="2.3" rx="6.4" ry="7.8"></ellipse>
-              <path class="chair-leg" d="M-3.2 1 -4.5 7M3.2 1 4.5 7"></path>
-              <path class="chair-seat" d="M-5.8 -3.3 Q-5.8 -4.7 -4.2 -4.7H4.2Q5.8 -4.7 5.8 -3.3V2Q5.8 4.7 3.2 4.7H-3.2Q-5.8 4.7 -5.8 2Z"></path>
-              <path class="chair-detail" d="M-3.7 -2.8 Q0 -1.8 3.7 -2.8"></path>
-              <path class="chair-back" d="M-6.3 -6.2Q-6.3 -10 0 -10.8Q6.3 -10 6.3 -6.2V-5.9Q6.3 -5 -6.3 -5.9Z"></path>
-              <path class="chair-detail" d="M-3.5 -8.3 Q0 -7 3.5 -8.3"></path>
+            <g id="round-chair">
+              <ellipse cx="0" cy="-4" rx="17" ry="22" fill="#57483f" opacity=".1"></ellipse>
+              <path d="M-13-18V-25Q-13-34 0-36Q13-34 13-25V-18" fill="url(#chair-upholstery)" stroke="url(#chair-wood)" stroke-width="2.2"></path>
+              <path d="M-8-25Q0-30 8-25" fill="none" stroke="#b98d77" stroke-width="1.3" stroke-linecap="round"></path>
+              <path d="M-17-15Q-21-15-21-10V-1Q-21 4-16 4H-12M17-15Q21-15 21-10V-1Q21 4 16 4H12" fill="none" stroke="url(#chair-wood)" stroke-width="2.5" stroke-linecap="round"></path>
+              <rect x="-12" y="-18" width="24" height="23" rx="7" fill="url(#chair-upholstery)" stroke="#a98565" stroke-width="1.7"></rect>
+              <path d="M-7-13Q0-10 7-13" fill="none" stroke="#fffaf4" stroke-width="1.3" stroke-linecap="round"></path>
+              <path d="M-9 5V10M9 5V10" stroke="#96704f" stroke-width="1.8" stroke-linecap="round"></path>
             </g>
-            <g id="large-round">
+            <g id="large-dining-table">
               <g aria-hidden="true">
-                <use href="#chair" transform="rotate(0) translate(0 -51)"></use>
-                <use href="#chair" transform="rotate(30) translate(0 -51)"></use>
-                <use href="#chair" transform="rotate(60) translate(0 -51)"></use>
-                <use href="#chair" transform="rotate(90) translate(0 -51)"></use>
-                <use href="#chair" transform="rotate(120) translate(0 -51)"></use>
-                <use href="#chair" transform="rotate(150) translate(0 -51)"></use>
-                <use href="#chair" transform="rotate(180) translate(0 -51)"></use>
-                <use href="#chair" transform="rotate(210) translate(0 -51)"></use>
-                <use href="#chair" transform="rotate(240) translate(0 -51)"></use>
-                <use href="#chair" transform="rotate(270) translate(0 -51)"></use>
-                <use href="#chair" transform="rotate(300) translate(0 -51)"></use>
-                <use href="#chair" transform="rotate(330) translate(0 -51)"></use>
+                <use href="#round-chair" transform="rotate(0) translate(0 -102)"></use>
+                <use href="#round-chair" transform="rotate(30) translate(0 -102)"></use>
+                <use href="#round-chair" transform="rotate(60) translate(0 -102)"></use>
+                <use href="#round-chair" transform="rotate(90) translate(0 -102)"></use>
+                <use href="#round-chair" transform="rotate(120) translate(0 -102)"></use>
+                <use href="#round-chair" transform="rotate(150) translate(0 -102)"></use>
+                <use href="#round-chair" transform="rotate(180) translate(0 -102)"></use>
+                <use href="#round-chair" transform="rotate(210) translate(0 -102)"></use>
+                <use href="#round-chair" transform="rotate(240) translate(0 -102)"></use>
+                <use href="#round-chair" transform="rotate(270) translate(0 -102)"></use>
+                <use href="#round-chair" transform="rotate(300) translate(0 -102)"></use>
+                <use href="#round-chair" transform="rotate(330) translate(0 -102)"></use>
               </g>
-              <circle class="tabletop" r="42"></circle>
-              <circle class="table-linen" r="38"></circle>
-              <text class="table-label" y="9">72″ ROUND</text>
-              <text class="table-sub" y="19">UP TO 12</text>
+              <circle r="86" cy="5" fill="#6d5547" opacity=".09"></circle>
+              <circle r="82" fill="#d7c3aa" stroke="#9f7b59" stroke-width="2"></circle>
+              <circle r="77" fill="url(#round-linen)" stroke="#fffdfa" stroke-width="2"></circle>
+              <circle r="70" fill="none" stroke="#eadcc9" stroke-width="1.4"></circle>
+              <path d="M-52-51Q0-73 52-51" fill="none" stroke="#fff" stroke-width="2" opacity=".75"></path>
+              <text y="-13" fill="#604941" font-family="var(--sans)" font-size="12" font-weight="600" letter-spacing=".8" text-anchor="middle">
+                <tspan x="0">72″ ROUND</tspan><tspan x="0" dy="18" fill="#957862" font-size="11" font-weight="500">UP TO 12 GUESTS</tspan>
+              </text>
             </g>
-            <g id="small-round">
+            <g id="small-dining-table">
               <g aria-hidden="true">
-                <use href="#chair" transform="rotate(0) translate(0 -44)"></use>
-                <use href="#chair" transform="rotate(45) translate(0 -44)"></use>
-                <use href="#chair" transform="rotate(90) translate(0 -44)"></use>
-                <use href="#chair" transform="rotate(135) translate(0 -44)"></use>
-                <use href="#chair" transform="rotate(180) translate(0 -44)"></use>
-                <use href="#chair" transform="rotate(225) translate(0 -44)"></use>
-                <use href="#chair" transform="rotate(270) translate(0 -44)"></use>
-                <use href="#chair" transform="rotate(315) translate(0 -44)"></use>
+                <use href="#round-chair" transform="rotate(0) translate(0 -91) scale(.88)"></use>
+                <use href="#round-chair" transform="rotate(45) translate(0 -91) scale(.88)"></use>
+                <use href="#round-chair" transform="rotate(90) translate(0 -91) scale(.88)"></use>
+                <use href="#round-chair" transform="rotate(135) translate(0 -91) scale(.88)"></use>
+                <use href="#round-chair" transform="rotate(180) translate(0 -91) scale(.88)"></use>
+                <use href="#round-chair" transform="rotate(225) translate(0 -91) scale(.88)"></use>
+                <use href="#round-chair" transform="rotate(270) translate(0 -91) scale(.88)"></use>
+                <use href="#round-chair" transform="rotate(315) translate(0 -91) scale(.88)"></use>
               </g>
-              <circle class="tabletop" r="35"></circle>
-              <circle class="table-linen" r="31.5"></circle>
-              <text class="table-label" y="8">60″ ROUND</text>
-              <text class="table-sub" y="17">UP TO 8</text>
-            </g>
-            <g id="long-table">
-              <use href="#chair" transform="translate(-17 -22) scale(.8)"></use>
-              <use href="#chair" transform="translate(17 -22) scale(.8)"></use>
-              <rect x="-31" y="-12" width="62" height="24" rx="4" fill="#e6c997" stroke="#8a5b37" stroke-width="1.4"></rect>
-              <path d="M-26 -7H26M-26 7H26" stroke="#f8edd9" stroke-width=".7" opacity=".85"></path>
-              <text class="table-label" y="3">6-FOOT TABLE</text>
+              <circle r="75" cy="5" fill="#6d5547" opacity=".09"></circle>
+              <circle r="71" fill="#d7c3aa" stroke="#9f7b59" stroke-width="2"></circle>
+              <circle r="66" fill="url(#round-linen)" stroke="#fffdfa" stroke-width="2"></circle>
+              <circle r="60" fill="none" stroke="#eadcc9" stroke-width="1.3"></circle>
+              <path d="M-42-42Q0-58 42-42" fill="none" stroke="#fff" stroke-width="1.8" opacity=".75"></path>
+              <text y="-15" fill="#604941" font-family="var(--sans)" font-size="10.5" font-weight="600" letter-spacing=".7" text-anchor="middle">
+                <tspan x="0">60″ ROUND</tspan><tspan x="0" dy="16" fill="#957862" font-size="9.5" font-weight="500">UP TO 8 GUESTS</tspan>
+              </text>
             </g>
           </defs>
-          <rect x="0" y="0" width="542" height="432" rx="12" fill="#fbf7f0"></rect>
-          <use href="#large-round" transform="translate(251 68)"></use>
-          <use href="#large-round" transform="translate(475 63)"></use>
-          <use href="#large-round" transform="translate(473 189)"></use>
-          <use href="#large-round" transform="translate(240 216)"></use>
-          <use href="#large-round" transform="translate(368 379)"></use>
-          <use href="#large-round" transform="translate(463 310)"></use>
-          <use href="#small-round" transform="translate(364 134)"></use>
-          <use href="#small-round" transform="translate(359 264)"></use>
-          <use href="#long-table" transform="translate(364 46)"></use>
-          <g aria-label="Bar">
-            <rect x="6" y="269" width="90" height="35" rx="5" fill="#75424a"></rect>
-            <path d="M17 274v25M85 274v25" stroke="#dfbd8a" stroke-width="1.2"></path>
-            <text x="51" y="291" fill="#fffaf1" font-family="var(--sans)" font-size="11" font-weight="700" letter-spacing="1.4" text-anchor="middle">BAR</text>
+          <use href="#large-dining-table" transform="translate(430 320)"></use>
+          <use href="#large-dining-table" transform="translate(1030 320)"></use>
+          <use href="#large-dining-table" transform="translate(430 690)"></use>
+          <use href="#large-dining-table" transform="translate(1030 690)"></use>
+          <use href="#large-dining-table" transform="translate(430 1060)"></use>
+          <use href="#large-dining-table" transform="translate(1030 1060)"></use>
+          <use href="#small-dining-table" transform="translate(730 505)"></use>
+          <use href="#small-dining-table" transform="translate(730 875)"></use>
+          <g transform="translate(67 0)" role="img" aria-label="Two-seat head table decorated with wedding flowers">
+            <rect x="560" y="18" width="147" height="120" rx="5" fill="#fff"></rect>
+            <ellipse cx="633" cy="116" rx="62" ry="12" fill="#573d35" opacity=".12"></ellipse>
+            <g aria-hidden="true">
+              <g transform="translate(601 59)">
+                <ellipse cx="0" cy="9" rx="19" ry="7" fill="#594239" opacity=".16"></ellipse>
+                <path d="M-15 11V-12Q-15-31 0-34Q15-31 15-12V11" fill="#f4e8d8" stroke="#8b684e" stroke-width="2.2"></path>
+                <path d="M-10 6V-12Q-10-25 0-28Q10-25 10-12V6" fill="#ead7c6" stroke="#bd9a7c" stroke-width="1.2"></path>
+                <path d="M-11-22Q0-29 11-22" fill="none" stroke="#a65360" stroke-width="2" stroke-linecap="round"></path>
+                <rect x="-13" y="-5" width="26" height="21" rx="7" fill="#fbf5eb" stroke="#8b684e" stroke-width="1.8"></rect>
+                <path d="M-9-1Q0 3 9-1" fill="none" stroke="#d9c0a5" stroke-width="1.2"></path>
+                <path d="M-18-5Q-22-5-22 0V7Q-22 11-18 11H-12M18-5Q22-5 22 0V7Q22 11 18 11H12" fill="none" stroke="#9c7657" stroke-width="2.4" stroke-linecap="round"></path>
+                <path d="M-9 15v4m18-4v4" stroke="#9c7657" stroke-width="1.8" stroke-linecap="round"></path>
+              </g>
+              <g transform="translate(667 59)">
+                <ellipse cx="0" cy="9" rx="19" ry="7" fill="#594239" opacity=".16"></ellipse>
+                <path d="M-15 11V-12Q-15-31 0-34Q15-31 15-12V11" fill="#f4e8d8" stroke="#8b684e" stroke-width="2.2"></path>
+                <path d="M-10 6V-12Q-10-25 0-28Q10-25 10-12V6" fill="#ead7c6" stroke="#bd9a7c" stroke-width="1.2"></path>
+                <path d="M-11-22Q0-29 11-22" fill="none" stroke="#a65360" stroke-width="2" stroke-linecap="round"></path>
+                <rect x="-13" y="-5" width="26" height="21" rx="7" fill="#fbf5eb" stroke="#8b684e" stroke-width="1.8"></rect>
+                <path d="M-9-1Q0 3 9-1" fill="none" stroke="#d9c0a5" stroke-width="1.2"></path>
+                <path d="M-18-5Q-22-5-22 0V7Q-22 11-18 11H-12M18-5Q22-5 22 0V7Q22 11 18 11H12" fill="none" stroke="#9c7657" stroke-width="2.4" stroke-linecap="round"></path>
+                <path d="M-9 15v4m18-4v4" stroke="#9c7657" stroke-width="1.8" stroke-linecap="round"></path>
+              </g>
+            </g>
+            <rect x="568" y="72" width="132" height="46" rx="5" fill="#8d6146" stroke="#694632" stroke-width="2"></rect>
+            <rect x="572" y="74" width="124" height="8" rx="3" fill="#c99b67"></rect>
+            <rect x="575" y="81" width="118" height="29" rx="2" fill="#fffaf0" stroke="#e4d5bd" stroke-width="1"></rect>
+            <path d="M575 84H693" stroke="#b88c5c" stroke-width="1.2"></path>
+            <rect x="591" y="88" width="86" height="16" rx="3" fill="#f2e8d7"></rect>
+            <text x="634" y="99.5" fill="#653846" font-family="Georgia,serif" font-size="9.5" letter-spacing="1" text-anchor="middle">HEAD TABLE</text>
+            <g aria-hidden="true" fill="none" stroke-linecap="round">
+              <path d="M579 114q11-8 21 0t21 0t21 0t21 0t21 0t21 0" stroke="#7a8a68" stroke-width="1.3"></path>
+              <path d="M589 111l-4-5m9 6 3-6m11 7-4-6m10 6 3-6m11 7-4-6m10 6 3-6m11 7-4-6m10 6 3-6m11 7-4-6m10 6 3-6" stroke="#9aa27b" stroke-width="1.5"></path>
+            </g>
+            <g fill="#a65360" stroke="#f5e5d8" stroke-width="1">
+              <circle cx="581" cy="114" r="4"></circle><circle cx="618" cy="115" r="4"></circle><circle cx="654" cy="115" r="4"></circle><circle cx="691" cy="114" r="4"></circle>
+            </g>
           </g>
+          <image href="seating-bar.svg" x="10" y="610" width="224" height="118" preserveAspectRatio="xMidYMid meet"></image>
         </svg>
       </div>
       <div class="legend" aria-label="Layout details">
         <div class="legend-item"><span class="legend-swatch" aria-hidden="true"></span>6 round tables · up to 12 guests each</div>
         <div class="legend-item"><span class="legend-swatch small" aria-hidden="true"></span>2 round tables · up to 8 guests each</div>
-        <div class="legend-item"><span class="legend-swatch long" aria-hidden="true"></span>1 six-foot table · 2 seats</div>
+        <div class="legend-item"><span class="legend-swatch head" aria-hidden="true"></span>Head table · 2 seats</div>
         <div class="legend-item"><span class="legend-swatch bar" aria-hidden="true"></span>Bar location</div>
       </div>
-      <p class="plan-footnote">Venue capacity layout for up to 90 guests · The couple's final table assignments may differ.</p>
+      <p class="plan-footnote">Illustrative layout based on venue capacity for up to 90 guests · Table spacing is shown for clarity; the couple's final assignments may differ.</p>
     </section>
     <section class="lookup-card" aria-labelledby="lookup-title">
       <div>
